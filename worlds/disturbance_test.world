@@ -1,0 +1,97 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="disturbance_test_world">
+
+    <!-- Physics: ODE, 200 Hz for accurate IMU simulation -->
+    <physics name="default_physics" default="0" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>150</iters>
+          <sor>1.400000</sor>
+        </solver>
+        <constraints>
+          <cfm>0</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>2000</contact_max_correcting_vel>
+          <contact_surface_layer>0.01000</contact_surface_layer>
+        </constraints>
+      </ode>
+    </physics>
+
+    <!-- Lighting -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- Ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- Ambient light -->
+    <scene>
+      <ambient>0.6 0.6 0.6 1</ambient>
+      <background>0.15 0.15 0.2 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <!-- ── Test Obstacle: Wall for disturbance ─────────────────────────── -->
+    <model name="test_wall">
+      <static>true</static>
+      <pose>1.5 0 0.5 0 0 0</pose>
+      <link name="wall_link">
+        <visual name="wall_visual">
+          <geometry>
+            <box><size>0.1 2.0 1.0</size></box>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/WoodFloor</name>
+            </script>
+          </material>
+        </visual>
+        <collision name="wall_collision">
+          <geometry>
+            <box><size>0.1 2.0 1.0</size></box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- ── Platform for robot to stand on ───────────────────────────────── -->
+    <model name="robot_platform">
+      <static>true</static>
+      <pose>0 0 0.245 0 0 0</pose>
+      <link name="platform_link">
+        <visual name="platform_visual">
+          <geometry>
+            <box><size>0.5 0.5 0.01</size></box>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Metal</name>
+            </script>
+          </material>
+        </visual>
+        <collision name="platform_collision">
+          <geometry>
+            <box><size>0.5 0.5 0.01</size></box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- ── Camera for better view ────────────────────────────────────────── -->
+    <gui fullscreen="0">
+      <camera name="user_camera">
+        <pose>2.5 -2.5 1.5 0 0.3 2.35</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+    </gui>
+
+  </world>
+</sdf>

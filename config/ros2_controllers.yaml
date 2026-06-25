@@ -1,0 +1,40 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 200  # Hz
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    torso_controller:
+      type: effort_controllers/JointGroupEffortController
+
+torso_controller:
+  ros__parameters:
+    joints:
+      - left_shoulder_joint
+      - left_upper_arm_joint
+      - left_elbow_joint
+      - left_forearm_joint
+      - left_wrist_joint
+      - right_shoulder_joint
+      - right_upper_arm_joint
+      - right_elbow_joint
+      - right_forearm_joint
+      - right_wrist_joint
+      - torso_neck_joint
+      - neck_head_joint
+
+fall_detection_node:
+  ros__parameters:
+    warning_tilt_deg: 20.0
+    falling_tilt_deg: 35.0
+    fallen_tilt_deg:  60.0
+    angular_vel_thresh: 1.5
+    impact_accel_thresh: 25.0
+    complementary_alpha: 0.98
+
+anti_disturbance_controller:
+  ros__parameters:
+    max_torque_nm: 45.0
+    feed_forward_gain: 8.0
+    deadband_deg: 1.5
