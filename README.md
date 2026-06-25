@@ -2,7 +2,7 @@
 ## Simulation Screenshots
 
 ### Gazebo — Robot on Platform
-![Gazebo Simulation](gazebo_screenshot.png)
+![Gazebo Simulation](Screenshot%202026-06-25%20130428.png)
 
 ### RViz — Fall Detection Live (State: WARNING)
-![RViz Visualization](rviz_screenshot.png)
+![RViz Visualization](Screenshot%202026-06-25%20130446.png)
